@@ -1,0 +1,22 @@
+on: 
+  push:
+    branches: dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setting configs
+      run: |
+        pip install pyyaml
+        python .github/workflows/replace.py root 123456 80
+    - name: Build Code
+      run: mvn clean package -Dmaven.test.skip=true
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ruoyi
+        path: |
+          target/ruoyi.jar
