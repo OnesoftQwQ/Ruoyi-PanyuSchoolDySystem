@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+    inputs:
+      MYSQL_USERNAME:
+        description: 'MySQL数据库用户名'
+        required: true
+        default: 'root'
+        type: string
+      MYSQL_PASSWORD:
+        description: 'MySQL数据库密码'
+        required: true
+        type: string
+      PORT:
+        description: '端口号'
+        required: true
+        default: '80'
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setting configs
+      run: |
+        pip install pyyaml
+        python .github/workflows/replace.py ${{inputs.MYSQL_USERNAME}} ${{inputs.MYSQL_PASSWORD}} ${{inputs.PORT}}
+    - name: Build Code
+      run: mvn clean package -Dmaven.test.skip=true
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ruoyi
+        path: |
+          target/ruoyi.jar
