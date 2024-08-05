@@ -1,7 +1,7 @@
 import sys
 import yaml
 
-with open('./ruoyi-admin/src/main/resources/application-druid.yml','r',encoding='utf8') as f:
+with open('./ruoyi-admin/src/main/resources/application.yml','r',encoding='utf8') as f:
     read = yaml.load(f,yaml.FullLoader)
     # read = f.read()
 read['server']['port'] = int(sys.argv[3])
