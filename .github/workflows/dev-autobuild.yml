@@ -19,4 +19,4 @@ jobs:
       with:
         name: ruoyi
         path: |
-          target/ruoyi.jar
+          ruoyi-admin/target/ruoyi-admin.jar
