@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.pyzxdormitory.mapper.PyzxDormitoryDetailMapper">
+    
+    <resultMap type="PyzxDormitoryDetail" id="PyzxDormitoryDetailResult">
+        <result property="id"    column="id"    />
+        <result property="pid"    column="pid"    />
+        <result property="grade"    column="grade"    />
+        <result property="stuclass"    column="stuclass"    />
+        <result property="room"    column="room"    />
+        <result property="bad"    column="bad"    />
+        <result property="sex"    column="sex"    />
+        <result property="standard"    column="standard"    />
+        <result property="standardreason"    column="standardreason"    />
+        <result property="checkdate"    column="checkdate"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <sql id="selectPyzxDormitoryDetailVo">
+        select id, pid, grade, stuclass, room, bad, sex, standard, standardreason, checkdate, create_time, update_time, create_by from pyzx_dormitory_detail
+    </sql>
+
+    <select id="selectPyzxDormitoryDetailList" parameterType="PyzxDormitoryDetail" resultMap="PyzxDormitoryDetailResult">
+        <include refid="selectPyzxDormitoryDetailVo"/>
+        <where>  
+            <if test="grade != null  and grade != ''"> and grade = #{grade}</if>
+            <if test="stuclass != null  and stuclass != ''"> and stuclass = #{stuclass}</if>
+            <if test="sex != null "> and sex = #{sex}</if>
+            <if test="checkdate != null "> and checkdate = #{checkdate}</if>
+        </where>
+    </select>
+    
+    <select id="selectPyzxDormitoryDetailById" parameterType="Long" resultMap="PyzxDormitoryDetailResult">
+        <include refid="selectPyzxDormitoryDetailVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPyzxDormitoryDetail" parameterType="PyzxDormitoryDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into pyzx_dormitory_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">pid,</if>
+            <if test="grade != null">grade,</if>
+            <if test="stuclass != null">stuclass,</if>
+            <if test="room != null">room,</if>
+            <if test="bad != null">bad,</if>
+            <if test="sex != null">sex,</if>
+            <if test="standard != null">standard,</if>
+            <if test="standardreason != null">standardreason,</if>
+            <if test="checkdate != null">checkdate,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">#{pid},</if>
+            <if test="grade != null">#{grade},</if>
+            <if test="stuclass != null">#{stuclass},</if>
+            <if test="room != null">#{room},</if>
+            <if test="bad != null">#{bad},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="standard != null">#{standard},</if>
+            <if test="standardreason != null">#{standardreason},</if>
+            <if test="checkdate != null">#{checkdate},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePyzxDormitoryDetail" parameterType="PyzxDormitoryDetail">
+        update pyzx_dormitory_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="stuclass != null">stuclass = #{stuclass},</if>
+            <if test="room != null">room = #{room},</if>
+            <if test="bad != null">bad = #{bad},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="standard != null">standard = #{standard},</if>
+            <if test="standardreason != null">standardreason = #{standardreason},</if>
+            <if test="checkdate != null">checkdate = #{checkdate},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePyzxDormitoryDetailById" parameterType="Long">
+        delete from pyzx_dormitory_detail where id = #{id}
+    </delete>
+
+    <delete id="deletePyzxDormitoryDetailByIds" parameterType="String">
+        delete from pyzx_dormitory_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

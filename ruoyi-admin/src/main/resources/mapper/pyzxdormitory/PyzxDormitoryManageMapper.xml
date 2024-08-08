@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.pyzxdormitory.mapper.PyzxDormitoryManageMapper">
+    
+    <resultMap type="PyzxDormitoryManage" id="PyzxDormitoryManageResult">
+        <result property="id"    column="id"    />
+        <result property="dormitoryNum"    column="dormitory_num"    />
+        <result property="dormitoryType"    column="dormitory_type"    />
+        <result property="dormitoryRegion"    column="dormitory_region"    />
+        <result property="dormitoryManager"    column="dormitory_manager"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <resultMap id="PyzxDormitoryManagePyzxDormitoryBoarderResult" type="PyzxDormitoryManage" extends="PyzxDormitoryManageResult">
+        <collection property="pyzxDormitoryBoarderList" ofType="PyzxDormitoryBoarder" column="id" select="selectPyzxDormitoryBoarderList" />
+    </resultMap>
+
+    <resultMap type="PyzxDormitoryBoarder" id="PyzxDormitoryBoarderResult">
+        <result property="sid"    column="sid"    />
+        <result property="stuNo"    column="stu_no"    />
+        <result property="stuName"    column="stu_name"    />
+        <result property="stuBedno"    column="stu_bedno"    />
+        <result property="stuGrade"    column="stu_grade"    />
+        <result property="stuClass"    column="stu_class"    />
+        <result property="stuTell"    column="stu_tell"    />
+        <result property="stuAddress"    column="stu_address"    />
+        <result property="stuAvatar"    column="stu_avatar"    />
+        <result property="stustatus"    column="stustatus"    />
+        <result property="dormitoryNum"    column="dormitory_num"    />
+        <result property="inDate"    column="in_date"    />
+        <result property="outDate"    column="out_date"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPyzxDormitoryManageVo">
+        select id, dormitory_num, dormitory_type, dormitory_region, dormitory_manager, remark, status, create_time, update_time, create_by from pyzx_dormitory_manage
+    </sql>
+
+    <select id="selectPyzxDormitoryManageList" parameterType="PyzxDormitoryManage" resultMap="PyzxDormitoryManageResult">
+        <include refid="selectPyzxDormitoryManageVo"/>
+        <where>  
+            <if test="dormitoryNum != null "> and dormitory_num = #{dormitoryNum}</if>
+            <if test="dormitoryType != null  and dormitoryType != ''"> and dormitory_type = #{dormitoryType}</if>
+            <if test="dormitoryManager != null  and dormitoryManager != ''"> and dormitory_manager = #{dormitoryManager}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectPyzxDormitoryManageById" parameterType="Long" resultMap="PyzxDormitoryManagePyzxDormitoryBoarderResult">
+        select id, dormitory_num, dormitory_type, dormitory_region, dormitory_manager, remark, status, create_time, update_time, create_by
+        from pyzx_dormitory_manage
+        where id = #{id}
+    </select>
+
+    <select id="selectPyzxDormitoryBoarderList" resultMap="PyzxDormitoryBoarderResult">
+        select sid, stu_no, stu_name, stu_bedno, stu_grade, stu_class, stu_tell, stu_address, stu_avatar, stustatus, dormitory_num, in_date, out_date, create_time, update_time, create_by, remark
+        from pyzx_dormitory_boarder
+        where sid = #{sid}
+    </select>
+
+    <insert id="insertPyzxDormitoryManage" parameterType="PyzxDormitoryManage" useGeneratedKeys="true" keyProperty="id">
+        insert into pyzx_dormitory_manage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dormitoryNum != null">dormitory_num,</if>
+            <if test="dormitoryType != null">dormitory_type,</if>
+            <if test="dormitoryRegion != null">dormitory_region,</if>
+            <if test="dormitoryManager != null">dormitory_manager,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dormitoryNum != null">#{dormitoryNum},</if>
+            <if test="dormitoryType != null">#{dormitoryType},</if>
+            <if test="dormitoryRegion != null">#{dormitoryRegion},</if>
+            <if test="dormitoryManager != null">#{dormitoryManager},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePyzxDormitoryManage" parameterType="PyzxDormitoryManage">
+        update pyzx_dormitory_manage
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dormitoryNum != null">dormitory_num = #{dormitoryNum},</if>
+            <if test="dormitoryType != null">dormitory_type = #{dormitoryType},</if>
+            <if test="dormitoryRegion != null">dormitory_region = #{dormitoryRegion},</if>
+            <if test="dormitoryManager != null">dormitory_manager = #{dormitoryManager},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePyzxDormitoryManageById" parameterType="Long">
+        delete from pyzx_dormitory_manage where id = #{id}
+    </delete>
+
+    <delete id="deletePyzxDormitoryManageByIds" parameterType="String">
+        delete from pyzx_dormitory_manage where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <delete id="deletePyzxDormitoryBoarderBySids" parameterType="String">
+        delete from pyzx_dormitory_boarder where sid in 
+        <foreach item="sid" collection="array" open="(" separator="," close=")">
+            #{sid}
+        </foreach>
+    </delete>
+
+    <delete id="deletePyzxDormitoryBoarderBySid" parameterType="Long">
+        delete from pyzx_dormitory_boarder where sid = #{sid}
+    </delete>
+
+    <insert id="batchPyzxDormitoryBoarder">
+        insert into pyzx_dormitory_boarder( sid, stu_no, stu_name, stu_bedno, stu_grade, stu_class, stu_tell, stu_address, stu_avatar, stustatus, dormitory_num, in_date, out_date, create_time, update_time, create_by, remark) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.sid}, #{item.stuNo}, #{item.stuName}, #{item.stuBedno}, #{item.stuGrade}, #{item.stuClass}, #{item.stuTell}, #{item.stuAddress}, #{item.stuAvatar}, #{item.stustatus}, #{item.dormitoryNum}, #{item.inDate}, #{item.outDate}, #{item.createTime}, #{item.updateTime}, #{item.createBy}, #{item.remark})
+        </foreach>
+    </insert>
+
+</mapper>
