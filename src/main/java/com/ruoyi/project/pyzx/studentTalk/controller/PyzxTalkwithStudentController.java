@@ -1,4 +1,4 @@
-package com.ruoyi.project.system.student.controller;
+package com.ruoyi.project.pyzx.studentTalk.controller;
 
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.system.student.domain.PyzxTalkwithStudent;
-import com.ruoyi.project.system.student.service.IPyzxTalkwithStudentService;
+import com.ruoyi.project.pyzx.studentTalk.domain.PyzxTalkwithStudent;
+import com.ruoyi.project.pyzx.studentTalk.service.IPyzxTalkwithStudentService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -22,29 +22,29 @@ import com.ruoyi.framework.web.page.TableDataInfo;
 /**
  * 谈心谈话记录Controller
  * 
- * @author ruoyi
+ * @author 落叶
  * @date 2024-08-09
  */
 @Controller
-@RequestMapping("/system/student")
+@RequestMapping("/pyzxInformation/studentTalk")
 public class PyzxTalkwithStudentController extends BaseController
 {
-    private String prefix = "system/student";
+    private String prefix = "pyzxInformation/studentTalk";
 
     @Autowired
     private IPyzxTalkwithStudentService pyzxTalkwithStudentService;
 
-    @RequiresPermissions("system:student:view")
+    @RequiresPermissions("pyzxInformation:studentTalk:view")
     @GetMapping()
-    public String student()
+    public String studentTalk()
     {
-        return prefix + "/student";
+        return prefix + "/studentTalk";
     }
 
     /**
      * 查询谈心谈话记录列表
      */
-    @RequiresPermissions("system:student:list")
+    @RequiresPermissions("pyzxInformation:studentTalk:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(PyzxTalkwithStudent pyzxTalkwithStudent)
@@ -57,7 +57,7 @@ public class PyzxTalkwithStudentController extends BaseController
     /**
      * 导出谈心谈话记录列表
      */
-    @RequiresPermissions("system:student:export")
+    @RequiresPermissions("pyzxInformation:studentTalk:export")
     @Log(title = "谈心谈话记录", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
@@ -80,7 +80,7 @@ public class PyzxTalkwithStudentController extends BaseController
     /**
      * 新增保存谈心谈话记录
      */
-    @RequiresPermissions("system:student:add")
+    @RequiresPermissions("pyzxInformation:studentTalk:add")
     @Log(title = "谈心谈话记录", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -92,7 +92,7 @@ public class PyzxTalkwithStudentController extends BaseController
     /**
      * 修改谈心谈话记录
      */
-    @RequiresPermissions("system:student:edit")
+    @RequiresPermissions("pyzxInformation:studentTalk:edit")
     @GetMapping("/edit/{itemId}")
     public String edit(@PathVariable("itemId") Long itemId, ModelMap mmap)
     {
@@ -104,7 +104,7 @@ public class PyzxTalkwithStudentController extends BaseController
     /**
      * 修改保存谈心谈话记录
      */
-    @RequiresPermissions("system:student:edit")
+    @RequiresPermissions("pyzxInformation:studentTalk:edit")
     @Log(title = "谈心谈话记录", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -116,7 +116,7 @@ public class PyzxTalkwithStudentController extends BaseController
     /**
      * 删除谈心谈话记录
      */
-    @RequiresPermissions("system:student:remove")
+    @RequiresPermissions("pyzxInformation:studentTalk:remove")
     @Log(title = "谈心谈话记录", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody

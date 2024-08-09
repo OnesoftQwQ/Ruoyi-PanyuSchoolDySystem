@@ -1,4 +1,4 @@
-package com.ruoyi.project.system.student.domain;
+package com.ruoyi.project.pyzx.studentTalk.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -10,7 +10,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 /**
  * 谈心谈话记录对象 pyzx_talkwith_student
  * 
- * @author ruoyi
+ * @author 落叶
  * @date 2024-08-09
  */
 public class PyzxTalkwithStudent extends BaseEntity

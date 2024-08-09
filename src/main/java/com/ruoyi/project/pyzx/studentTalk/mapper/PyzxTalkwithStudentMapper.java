@@ -1,15 +1,15 @@
-package com.ruoyi.project.system.student.service;
+package com.ruoyi.project.pyzx.studentTalk.mapper;
 
 import java.util.List;
-import com.ruoyi.project.system.student.domain.PyzxTalkwithStudent;
+import com.ruoyi.project.pyzx.studentTalk.domain.PyzxTalkwithStudent;
 
 /**
- * 谈心谈话记录Service接口
+ * 谈心谈话记录Mapper接口
  * 
- * @author ruoyi
+ * @author 落叶
  * @date 2024-08-09
  */
-public interface IPyzxTalkwithStudentService 
+public interface PyzxTalkwithStudentMapper 
 {
     /**
      * 查询谈心谈话记录
@@ -44,18 +44,18 @@ public interface IPyzxTalkwithStudentService
     public int updatePyzxTalkwithStudent(PyzxTalkwithStudent pyzxTalkwithStudent);
 
     /**
-     * 批量删除谈心谈话记录
-     * 
-     * @param itemIds 需要删除的谈心谈话记录主键集合
-     * @return 结果
-     */
-    public int deletePyzxTalkwithStudentByItemIds(String itemIds);
-
-    /**
-     * 删除谈心谈话记录信息
+     * 删除谈心谈话记录
      * 
      * @param itemId 谈心谈话记录主键
      * @return 结果
      */
     public int deletePyzxTalkwithStudentByItemId(Long itemId);
+
+    /**
+     * 批量删除谈心谈话记录
+     * 
+     * @param itemIds 需要删除的数据主键集合
+     * @return 结果
+     */
+    public int deletePyzxTalkwithStudentByItemIds(String[] itemIds);
 }

@@ -1,18 +1,18 @@
-package com.ruoyi.project.system.student.service.impl;
+package com.ruoyi.project.pyzx.studentTalk.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.system.student.mapper.PyzxTalkwithStudentMapper;
-import com.ruoyi.project.system.student.domain.PyzxTalkwithStudent;
-import com.ruoyi.project.system.student.service.IPyzxTalkwithStudentService;
+import com.ruoyi.project.pyzx.studentTalk.mapper.PyzxTalkwithStudentMapper;
+import com.ruoyi.project.pyzx.studentTalk.domain.PyzxTalkwithStudent;
+import com.ruoyi.project.pyzx.studentTalk.service.IPyzxTalkwithStudentService;
 import com.ruoyi.common.utils.text.Convert;
 
 /**
  * 谈心谈话记录Service业务层处理
  * 
- * @author ruoyi
+ * @author 落叶
  * @date 2024-08-09
  */
 @Service

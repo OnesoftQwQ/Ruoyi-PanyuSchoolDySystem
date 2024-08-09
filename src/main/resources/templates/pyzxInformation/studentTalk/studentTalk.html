@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('谈心谈话记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>教师姓名：</label>
+                                <input type="text" name="teachername"/>
+                            </li>
+                            <li>
+                                <label>教师所属部门：</label>
+                                <input type="text" name="teacherorg"/>
+                            </li>
+                            <li>
+                                <label>学生姓名：</label>
+                                <input type="text" name="stuname"/>
+                            </li>
+                            <li>
+                                <label>学生班级：</label>
+                                <input type="text" name="stuclass"/>
+                            </li>
+                            <li>
+                                <label>家长联系方式：</label>
+                                <input type="text" name="stutell"/>
+                            </li>
+                            <li>
+                                <label>谈话时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择谈话时间" name="talktime"/>
+                            </li>
+                            <li>
+                                <label>谈话地点：</label>
+                                <input type="text" name="talkplace"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="pyzxInformation:studentTalk:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="pyzxInformation:studentTalk:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="pyzxInformation:studentTalk:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="pyzxInformation:studentTalk:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('pyzxInformation:studentTalk:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('pyzxInformation:studentTalk:remove')}]];
+        var prefix = ctx + "pyzxInformation/studentTalk";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "谈心谈话记录",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'itemId',
+                    title: '主键',
+                    visible: false
+                },
+                {
+                    field: 'teachername',
+                    title: '教师姓名'
+                },
+                {
+                    field: 'teacherorg',
+                    title: '教师所属部门'
+                },
+                {
+                    field: 'stuname',
+                    title: '学生姓名'
+                },
+                {
+                    field: 'stusex',
+                    title: '学生性别'
+                },
+                {
+                    field: 'stuclass',
+                    title: '学生班级'
+                },
+                {
+                    field: 'stutell',
+                    title: '家长联系方式'
+                },
+                {
+                    field: 'talktime',
+                    title: '谈话时间'
+                },
+                {
+                    field: 'talkplace',
+                    title: '谈话地点'
+                },
+                {
+                    field: 'talkcontent',
+                    title: '学生情况'
+                },
+                {
+                    field: 'talkresult',
+                    title: '帮扶措施及效果'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.itemId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.itemId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>
