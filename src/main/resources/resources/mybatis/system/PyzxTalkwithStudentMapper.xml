@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.student.mapper.PyzxTalkwithStudentMapper">
+    
+    <resultMap type="PyzxTalkwithStudent" id="PyzxTalkwithStudentResult">
+        <result property="itemId"    column="item_id"    />
+        <result property="teachername"    column="teachername"    />
+        <result property="teacherorg"    column="teacherorg"    />
+        <result property="stuname"    column="stuname"    />
+        <result property="stusex"    column="stusex"    />
+        <result property="stuclass"    column="stuclass"    />
+        <result property="stutell"    column="stutell"    />
+        <result property="talktime"    column="talktime"    />
+        <result property="talkplace"    column="talkplace"    />
+        <result property="talkcontent"    column="talkcontent"    />
+        <result property="talkresult"    column="talkresult"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+    </resultMap>
+
+    <sql id="selectPyzxTalkwithStudentVo">
+        select item_id, teachername, teacherorg, stuname, stusex, stuclass, stutell, talktime, talkplace, talkcontent, talkresult, create_time, update_time, create_by from pyzx_talkwith_student
+    </sql>
+
+    <select id="selectPyzxTalkwithStudentList" parameterType="PyzxTalkwithStudent" resultMap="PyzxTalkwithStudentResult">
+        <include refid="selectPyzxTalkwithStudentVo"/>
+        <where>  
+            <if test="teachername != null  and teachername != ''"> and teachername like concat('%', #{teachername}, '%')</if>
+            <if test="teacherorg != null  and teacherorg != ''"> and teacherorg = #{teacherorg}</if>
+            <if test="stuname != null  and stuname != ''"> and stuname like concat('%', #{stuname}, '%')</if>
+            <if test="stusex != null  and stusex != ''"> and stusex = #{stusex}</if>
+            <if test="stuclass != null  and stuclass != ''"> and stuclass = #{stuclass}</if>
+            <if test="stutell != null  and stutell != ''"> and stutell = #{stutell}</if>
+            <if test="talktime != null "> and talktime = #{talktime}</if>
+            <if test="talkplace != null  and talkplace != ''"> and talkplace = #{talkplace}</if>
+            <if test="talkcontent != null  and talkcontent != ''"> and talkcontent = #{talkcontent}</if>
+            <if test="talkresult != null  and talkresult != ''"> and talkresult = #{talkresult}</if>
+        </where>
+    </select>
+    
+    <select id="selectPyzxTalkwithStudentByItemId" parameterType="Long" resultMap="PyzxTalkwithStudentResult">
+        <include refid="selectPyzxTalkwithStudentVo"/>
+        where item_id = #{itemId}
+    </select>
+
+    <insert id="insertPyzxTalkwithStudent" parameterType="PyzxTalkwithStudent" useGeneratedKeys="true" keyProperty="itemId">
+        insert into pyzx_talkwith_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teachername != null">teachername,</if>
+            <if test="teacherorg != null">teacherorg,</if>
+            <if test="stuname != null">stuname,</if>
+            <if test="stusex != null">stusex,</if>
+            <if test="stuclass != null">stuclass,</if>
+            <if test="stutell != null">stutell,</if>
+            <if test="talktime != null">talktime,</if>
+            <if test="talkplace != null">talkplace,</if>
+            <if test="talkcontent != null">talkcontent,</if>
+            <if test="talkresult != null">talkresult,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teachername != null">#{teachername},</if>
+            <if test="teacherorg != null">#{teacherorg},</if>
+            <if test="stuname != null">#{stuname},</if>
+            <if test="stusex != null">#{stusex},</if>
+            <if test="stuclass != null">#{stuclass},</if>
+            <if test="stutell != null">#{stutell},</if>
+            <if test="talktime != null">#{talktime},</if>
+            <if test="talkplace != null">#{talkplace},</if>
+            <if test="talkcontent != null">#{talkcontent},</if>
+            <if test="talkresult != null">#{talkresult},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePyzxTalkwithStudent" parameterType="PyzxTalkwithStudent">
+        update pyzx_talkwith_student
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teachername != null">teachername = #{teachername},</if>
+            <if test="teacherorg != null">teacherorg = #{teacherorg},</if>
+            <if test="stuname != null">stuname = #{stuname},</if>
+            <if test="stusex != null">stusex = #{stusex},</if>
+            <if test="stuclass != null">stuclass = #{stuclass},</if>
+            <if test="stutell != null">stutell = #{stutell},</if>
+            <if test="talktime != null">talktime = #{talktime},</if>
+            <if test="talkplace != null">talkplace = #{talkplace},</if>
+            <if test="talkcontent != null">talkcontent = #{talkcontent},</if>
+            <if test="talkresult != null">talkresult = #{talkresult},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+        </trim>
+        where item_id = #{itemId}
+    </update>
+
+    <delete id="deletePyzxTalkwithStudentByItemId" parameterType="Long">
+        delete from pyzx_talkwith_student where item_id = #{itemId}
+    </delete>
+
+    <delete id="deletePyzxTalkwithStudentByItemIds" parameterType="String">
+        delete from pyzx_talkwith_student where item_id in 
+        <foreach item="itemId" collection="array" open="(" separator="," close=")">
+            #{itemId}
+        </foreach>
+    </delete>
+
+</mapper>
