@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="standard"    column="standard"    />
         <result property="standardreason"    column="standardreason"    />
         <result property="checkdate"    column="checkdate"    />
-        <result property="createBy"    column="create_by"    />
+        <result property="signin"    column="create_by"    />
         <result property="checkedBy"    column="checked_by"    />
     </resultMap>
 
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="room != null "> and room = #{room}</if>
             <if test="checkdate != null "> and checkdate = #{checkdate}</if>
-            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="signin != null  and signin != ''"> and create_by like concat('%', #{signin}, '%')</if>
         </where>
     </select>
     
@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="standard != null">standard,</if>
             <if test="standardreason != null">standardreason,</if>
             <if test="checkdate != null">checkdate,</if>
-            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="signin != null and signin != ''">create_by,</if>
             <if test="checkedBy != null">checked_by,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="standard != null">#{standard},</if>
             <if test="standardreason != null">#{standardreason},</if>
             <if test="checkdate != null">#{checkdate},</if>
-            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="signin != null and signin != ''">#{signin},</if>
             <if test="checkedBy != null">#{checkedBy},</if>
          </trim>
     </insert>
@@ -90,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="standard != null">standard = #{standard},</if>
             <if test="standardreason != null">standardreason = #{standardreason},</if>
             <if test="checkdate != null">checkdate = #{checkdate},</if>
-            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="signin != null and signin != ''">create_by = #{signin},</if>
             <if test="checkedBy != null">checked_by = #{checkedBy},</if>
         </trim>
         where id = #{id}

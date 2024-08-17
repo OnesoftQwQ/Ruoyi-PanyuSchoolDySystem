@@ -37,8 +37,8 @@
                                 <input type="text" class="time-input" placeholder="请选择检查日期" name="checkdate"/>
                             </li>
                             <li>
-                                <label>创建人：</label>
-                                <input type="text" name="createBy"/>
+                                <label>登记人：</label>
+                                <input type="text" name="signin"/>
                             </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -74,7 +74,6 @@
         var removeFlag = [[${@permission.hasPermi('pyzxsub:sub:remove')}]];
         var weeknumDatas = [[${@dict.getType('sys_week_num')}]];
         var weeknameDatas = [[${@dict.getType('sys_week_name')}]];
-        var nameDatas = [[${@dict.getType('pyzx_student_name')}]];
         var gradeDatas = [[${@dict.getType('sys_dept_list')}]];
         var stuclassDatas = [[${@dict.getType('pyzx_student_class')}]];
         var sexDatas = [[${@dict.getType('sys_user_sex')}]];
@@ -112,10 +111,7 @@
                 },
                 {
                     field: 'name',
-                    title: '姓名',
-                    formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(nameDatas, value);
-                    }
+                    title: '姓名'
                 },
                 {
                     field: 'grade',
@@ -159,8 +155,8 @@
                     title: '检查日期'
                 },
                 {
-                    field: 'createBy',
-                    title: '创建人'
+                    field: 'signin',
+                    title: '登记人'
                 },
                 {
                     field: 'checkedBy',
