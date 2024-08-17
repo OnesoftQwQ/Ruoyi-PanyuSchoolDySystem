@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.pyzx.sub.mapper.PyzxSusheSubMapper">
+    
+    <resultMap type="PyzxSusheSub" id="PyzxSusheSubResult">
+        <result property="id"    column="id"    />
+        <result property="weeknum"    column="weeknum"    />
+        <result property="weekname"    column="weekname"    />
+        <result property="name"    column="name"    />
+        <result property="grade"    column="grade"    />
+        <result property="stuclass"    column="stuclass"    />
+        <result property="room"    column="room"    />
+        <result property="bad"    column="bad"    />
+        <result property="sex"    column="sex"    />
+        <result property="standard"    column="standard"    />
+        <result property="standardreason"    column="standardreason"    />
+        <result property="checkdate"    column="checkdate"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="checkedBy"    column="checked_by"    />
+    </resultMap>
+
+    <sql id="selectPyzxSusheSubVo">
+        select id, weeknum, weekname, name, grade, stuclass, room, bad, sex, standard, standardreason, checkdate, create_by, checked_by from pyzx_sushe_sub
+    </sql>
+
+    <select id="selectPyzxSusheSubList" parameterType="PyzxSusheSub" resultMap="PyzxSusheSubResult">
+        <include refid="selectPyzxSusheSubVo"/>
+        <where>  
+            <if test="weeknum != null  and weeknum != ''"> and weeknum = #{weeknum}</if>
+            <if test="weekname != null  and weekname != ''"> and weekname = #{weekname}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="room != null "> and room = #{room}</if>
+            <if test="checkdate != null "> and checkdate = #{checkdate}</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+        </where>
+    </select>
+    
+    <select id="selectPyzxSusheSubById" parameterType="Long" resultMap="PyzxSusheSubResult">
+        <include refid="selectPyzxSusheSubVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPyzxSusheSub" parameterType="PyzxSusheSub" useGeneratedKeys="true" keyProperty="id">
+        insert into pyzx_sushe_sub
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="weeknum != null and weeknum != ''">weeknum,</if>
+            <if test="weekname != null and weekname != ''">weekname,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="grade != null and grade != ''">grade,</if>
+            <if test="stuclass != null and stuclass != ''">stuclass,</if>
+            <if test="room != null">room,</if>
+            <if test="bad != null">bad,</if>
+            <if test="sex != null">sex,</if>
+            <if test="standard != null">standard,</if>
+            <if test="standardreason != null">standardreason,</if>
+            <if test="checkdate != null">checkdate,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="checkedBy != null">checked_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="weeknum != null and weeknum != ''">#{weeknum},</if>
+            <if test="weekname != null and weekname != ''">#{weekname},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="grade != null and grade != ''">#{grade},</if>
+            <if test="stuclass != null and stuclass != ''">#{stuclass},</if>
+            <if test="room != null">#{room},</if>
+            <if test="bad != null">#{bad},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="standard != null">#{standard},</if>
+            <if test="standardreason != null">#{standardreason},</if>
+            <if test="checkdate != null">#{checkdate},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="checkedBy != null">#{checkedBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePyzxSusheSub" parameterType="PyzxSusheSub">
+        update pyzx_sushe_sub
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="weeknum != null and weeknum != ''">weeknum = #{weeknum},</if>
+            <if test="weekname != null and weekname != ''">weekname = #{weekname},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="grade != null and grade != ''">grade = #{grade},</if>
+            <if test="stuclass != null and stuclass != ''">stuclass = #{stuclass},</if>
+            <if test="room != null">room = #{room},</if>
+            <if test="bad != null">bad = #{bad},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="standard != null">standard = #{standard},</if>
+            <if test="standardreason != null">standardreason = #{standardreason},</if>
+            <if test="checkdate != null">checkdate = #{checkdate},</if>
+            <if test="createBy != null and createBy != ''">create_by = #{createBy},</if>
+            <if test="checkedBy != null">checked_by = #{checkedBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePyzxSusheSubById" parameterType="Long">
+        delete from pyzx_sushe_sub where id = #{id}
+    </delete>
+
+    <delete id="deletePyzxSusheSubByIds" parameterType="String">
+        delete from pyzx_sushe_sub where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

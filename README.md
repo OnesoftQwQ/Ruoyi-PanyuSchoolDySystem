@@ -1,20 +1,3 @@
-spring.thymeleaf.prefix=classpath:/templates/
-spring.thymeleaf.suffix=.html
-spring.thymeleaf.enabled=true
-spring.thymeleaf.prefix=classpath:/templates/
-spring.thymeleaf.suffix=.html
-@GetMapping("/information")
-public String information(Model model) {
-    // 添加数据到模型
-    return "system/information/information";
-}
-spring.thymeleaf.prefix=classpath:/templates/
-spring.thymeleaf.suffix=.html
-@GetMapping("/information")
-public String information(Model model) {
-    // 添加数据到模型
-    return "system/information/information";
-}
 <p align="center">
 	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-dd77653d7c9f197dd9d93684f3c8dcfbab6.png">
 </p>
