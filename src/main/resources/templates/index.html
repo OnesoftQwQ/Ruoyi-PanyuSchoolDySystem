@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>若依系统首页</title>
+    <title>23电子2班系统首页</title>
     <!-- 避免IE使用兼容模式 -->
  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link th:href="@{favicon.ico}" rel="shortcut icon"/>
@@ -106,10 +106,6 @@
 								<a onclick="switchSkin()">
 								<i class="fa fa-dashboard"></i> 切换主题</a>
 							</li>
-							<li>
-								<a onclick="toggleMenu()">
-								<i class="fa fa-toggle-off"></i> 横向菜单</a>
-							</li>
 							<li class="divider"></li>
 							<li>
 								<a th:href="@{logout}">
@@ -202,14 +198,6 @@ function switchSkin() {
 	})
 }
 
-/* 切换菜单 */
-function toggleMenu() {
-	$.modal.confirm("确认要切换成横向菜单吗？", function() {
-		$.get(ctx + 'system/menuStyle/topnav', function(result) {
-            window.location.reload();
-	    });
-	})
-}
 
 /** 刷新时访问路径页签 */
 function applyPath(url) {
