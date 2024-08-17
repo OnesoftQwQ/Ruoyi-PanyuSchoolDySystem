@@ -100,7 +100,7 @@ shiro:
     # 验证码开关
     captchaEnabled: true
     # 验证码类型 math 数字计算 char 字符验证
-    captchaType: math
+    captchaType: char
   cookie:
     # 设置Cookie的域名 默认空，即当前访问的域名
     domain:
@@ -120,7 +120,7 @@ shiro:
     # 相隔多久检查一次session的有效性，默认就是10分钟
     validationInterval: 10
     # 同一个用户最大会话数，比如2的意思是同一个账号允许最多同时两个人登录（默认-1不限制）
-    maxSession: -1
+    maxSession: 1
     # 踢出之前登录的/之后登录的用户，默认踢出之前登录的用户
     kickoutAfter: false
   rememberMe:
@@ -144,9 +144,9 @@ swagger:
 # 代码生成
 gen:
   # 作者
-  author: ruoyi
+  author: 落叶
   # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
-  packageName: com.ruoyi.project.system
+  packageName: com.ruoyi.project.pyzx
   # 自动去除表前缀，默认是true
   autoRemovePre: true
   # 表前缀（生成类名不会包含表前缀，多个用逗号分隔）
