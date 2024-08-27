@@ -66,6 +66,10 @@ public class PyzxSusheSub extends BaseEntity
     @Excel(name = "检查日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date checkdate;
 
+    /** 登记人 */
+    @Excel(name = "登记人")
+    private String signin;
+
     /** 核对人 */
     @Excel(name = "核对人")
     private String checkedBy;
@@ -190,6 +194,16 @@ public class PyzxSusheSub extends BaseEntity
         return checkdate;
     }
 
+    public void setSignin(String signin) 
+    {
+        this.signin = signin;
+    }
+
+    public String getSignin() 
+    {
+        return signin;
+    }
+
     public void setCheckedBy(String checkedBy) 
     {
         this.checkedBy = checkedBy;
@@ -215,7 +229,7 @@ public class PyzxSusheSub extends BaseEntity
             .append("standard", getStandard())
             .append("standardreason", getStandardreason())
             .append("checkdate", getCheckdate())
-            .append("createBy", getCreateBy())
+            .append("signin", getSignin())
             .append("checkedBy", getCheckedBy())
             .toString();
     }
